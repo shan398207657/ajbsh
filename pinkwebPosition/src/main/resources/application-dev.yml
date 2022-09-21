@@ -1,0 +1,86 @@
+spring:
+  redis:
+    database: 1
+    host: 124.223.111.168
+    port: 6379
+    password:
+    timeout: 6000ms
+    lettuce:
+      pool:
+        max-active: 1000
+        max-wait: -1ms
+        max-idle: 10
+        min-idle: 5
+  autoconfigure:
+    exclude: com.alibaba.druid.spring.boot.autoconfigure.DruidDataSourceAutoConfigure
+  datasource:
+      type: com.alibaba.druid.pool.DruidDataSource
+      druid:
+          first:
+              url: jdbc:mysql://124.223.111.168:3306/shansj?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8
+              driverClassName: com.mysql.jdbc.Driver
+              username: root
+              password: 1014822
+          initial-size: 5
+          min-idle: 5
+          max-active: 20
+          max-wait: 6000
+          time-between-eviction-runs-millis: 60000
+          min-evictable-idle-time-millis: 30000
+          test-on-borrow: false
+          test-on-return: false
+          pool-prepared-statements: true
+          max-pool-prepared-statement-per-connection-size: 20
+  servlet:
+    multipart:
+      max-file-size: 100MB
+      max-request-size: 200MB
+
+
+# sql打印
+logging:
+  level:
+    com.univ.customs.mapper: debug
+    com.alibaba.druid.pool.DruidAbstractDataSource.*: WARN
+
+#mybatis
+mybatis-plus:
+  mapper-locations: classpath*:/mapper/**/*.xml
+  #实体扫描，多个package用逗号或者分号分隔
+  typeAliasesPackage: com.work.ssj.*.entity
+  global-config:
+    #主键类型  0:"数据库ID自增", 1:"用户输入ID",2:"全局唯一ID (数字类型唯一ID)", 3:"全局唯一ID UUID", 5: id_word d 字符串类型;
+    id-type: 5
+    #字段策略 0:"忽略判断",1:"非 NULL 判断"),2:"非空判断"
+    field-strategy: 2
+    #驼峰下划线转换
+    db-column-underline: true
+    #刷新mapper 调试神器
+    refresh-mapper: true
+    #数据库大写下划线转换
+    #capital-mode: true
+    #序列接口实现类配置
+    #key-generator: com.baomidou.springboot.xxx
+    #逻辑删除配置
+    logic-delete-value: -1
+    logic-not-delete-value: 0
+    #自定义SQL注入器
+    sql-injector: com.baomidou.mybatisplus.mapper.LogicSqlInjector
+  configuration:
+    map-underscore-to-camel-case: true
+    cache-enabled: false
+    call-setters-on-nulls: true
+#阿里云OSS
+#不同的服务器，地址不同
+aliyun:
+  oss:
+    file:
+      endpoint: oss-cn-shanghai.aliyuncs.com
+      keyid: LTAI5tPyuhMzgK2em4ajGrmG
+      keysecret: y5fG0ONUo7LMrFOBx90my74uA4tnxC
+  #bucket可以在控制台创建，也可以使用java代码创建
+      bucketname: shan-test
+
+email4:
+  toUser4: 398207657@qq.com
+  ccUser4: 398207657@qq.com

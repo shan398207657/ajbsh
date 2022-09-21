@@ -1,0 +1,11 @@
+server:
+  port: 8085
+  servlet:
+    context-path: /shansj
+spring:
+  application:
+    # 应用名称
+    name: @artifactId@
+  profiles:
+    # 环境配置
+    active: @active@
